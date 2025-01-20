@@ -7,3 +7,4 @@ def index(request):
     return render(request, 'product/content_list.html', context)
 
 
+
