@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - TechEase Inc.</title>
+    <title>Login - 지역 농산물 직거래</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,7 @@
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #0073e6;
+            color: #4CAF50; /* 농산물에 어울리는 녹색 */
         }
 
         .form-container label {
@@ -50,7 +50,7 @@
         .form-container button {
             width: 100%;
             padding: 10px;
-            background: #0073e6;
+            background: #4CAF50; /* 농산물에 어울리는 녹색 */
             color: white;
             border: none;
             border-radius: 5px;
@@ -58,7 +58,7 @@
         }
 
         .form-container button:hover {
-            background: #005bb5;
+            background: #45a049; /* 다소 어두운 녹색 */
         }
 
         .form-container p {
@@ -67,28 +67,46 @@
         }
 
         .form-container p a {
-            color: #0073e6;
+            color: #4CAF50; /* 농산물에 어울리는 녹색 */
             text-decoration: none;
         }
 
         .form-container p a:hover {
             text-decoration: underline;
         }
+
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #f39c12; /* 주황색 */
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background: #e67e22; /* 다소 어두운 주황색 */
+        }
     </style>
 </head>
 <body>
+    <a href="http://localhost:8000/" class="back-button">홈으로 돌아가기</a>
     <div class="form-container">
-        <h2>Login</h2>
+        <h2>로그인</h2>
         <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
 
-            <button type="submit">Login</button>
+            <button type="submit">로그인</button>
         </form>
-        <p>Don't have an account? <a href="http://localhost:8000/signup/">Sign up here</a>.</p>
+        <p>계정이 없으신가요? <a href="http://localhost:8000/signup/">여기에서 가입하세요</a>.</p>
     </div>
 </body>
 </html>
