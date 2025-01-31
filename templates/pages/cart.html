@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 - 지역 농산물 직거래</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .cart-container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .cart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50; /* 농산물에 어울리는 녹색 */
+        }
+        .cart-table {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart-table th, .cart-table td {
+            vertical-align: middle;
+        }
+        .remove-btn {
+            background-color: #dc3545; /* 빨간색 */
+            color: white;
+        }
+        .remove-btn:hover {
+            background-color: #c82333; /* 다소 어두운 빨간색 */
+        }
+        .total-price {
+            font-weight: bold;
+            color: #333;
+        }
+        .action-buttons {
+            margin-top: 20px;
+        }
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #f39c12; /* 주황색 */
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background: #e67e22; /* 다소 어두운 주황색 */
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
+    <div class="cart-container">
+        <h1 class="cart-title">장바구니</h1>
+        <table class="table cart-table">
+            <thead>
+                <tr>
+                    <th>상품</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                    <th>총 가격</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if cart_items %}
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.product.price }}원</td>
+                        <td>
+                            <input type="number" value="{{ item.quantity }}" min="1" class="form-control" style="width: 80px;">
+                        </td>
+                        <td>{{ item.total_price }}원</td>
+                        <td>
+                            <form method="post" action="{% url 'pages:remove_from_cart' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn remove-btn">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">장바구니에 아이템이 없습니다.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <div class="text-right">
+            <h3 class="total-price">총합: {{ total_price }}원</h3>
+        </div>
+
+        <div class="action-buttons text-right">
+            <a href="{% url 'pages:products' %}" class="btn btn-secondary">계속 쇼핑하기</a>
+            <a href="{% url 'pages:order' %}" class="btn btn-primary">주문하기</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

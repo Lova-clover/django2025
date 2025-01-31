@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,9 +21,9 @@
         }
 
         .form-container {
-            max-width: 400px;
+            max-width: 500px; /* 너비 증가 */
             margin: 50px auto;
-            padding: 20px;
+            padding: 30px; /* 패딩 증가 */
             border: 1px solid #ccc;
             border-radius: 5px;
             background: white;
@@ -41,7 +43,7 @@
 
         .form-container input {
             width: 100%;
-            padding: 10px;
+            padding: 12px; /* 패딩 증가 */
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -49,7 +51,7 @@
 
         .form-container button {
             width: 100%;
-            padding: 10px;
+            padding: 12px; /* 패딩 증가 */
             background: #4CAF50; /* 농산물에 어울리는 녹색 */
             color: white;
             border: none;
@@ -91,22 +93,38 @@
         .back-button:hover {
             background: #e67e22; /* 다소 어두운 주황색 */
         }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <a href="http://localhost:8000/" class="back-button">홈으로 돌아가기</a>
+    <a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
     <div class="form-container">
         <h2>로그인</h2>
-        <form>
-            <label for="email">이메일:</label>
-            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
 
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+        {% if form.errors %}
+            <p class="error-message">아이디 또는 비밀번호가 틀립니다. 다시 시도해주세요.</p>
+        {% endif %}
 
-            <button type="submit">로그인</button>
+        <form method="post" action="{% url 'pages:login' %}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+            <input type="submit" value="로그인">
         </form>
-        <p>계정이 없으신가요? <a href="http://localhost:8000/signup/">여기에서 가입하세요</a>.</p>
+        <p>계정이 없으신가요? <a href="{% url 'pages:signup' %}">여기에서 가입하세요</a>.</p>
     </div>
 </body>
 </html>

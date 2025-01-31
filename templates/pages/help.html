@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객센터</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+        .container {
+            width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            text-align: center;
+            color: #5a5a5a;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #4a4a4a;
+            margin-top: 30px;
+        }
+        .faq {
+            margin-top: 30px;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical; /* 세로 크기 조절 가능 */
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 12px 18px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+            transform: translateY(-2px);
+        }
+        .faq-item strong {
+            color: #333;
+        }
+        .faq-item p {
+            margin: 5px 0 0 0;
+            color: #555;
+        }
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #f39c12; /* 주황색 */
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background: #e67e22; /* 다소 어두운 주황색 */
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
+    <div class="container">
+        <h1>고객센터</h1>
+        <form method="post" action="">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+
+            <label for="message">문의 내용:</label>
+            <textarea id="message" name="message" rows="5" placeholder="문의 내용을 작성하세요" required></textarea>
+
+            <input type="submit" value="문의하기">
+        </form>
+
+        <div class="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <div class="faq-item">
+                <strong>Q: 서비스 이용 방법은 무엇인가요?</strong>
+                <p>A: 서비스 이용 방법은 홈페이지의 가이드를 참고하시기 바랍니다.</p>
+            </div>
+            <div class="faq-item">
+                <strong>Q: 문의사항은 어떻게 처리되나요?</strong>
+                <p>A: 문의사항은 접수 후 24시간 이내에 이메일로 답변 드립니다.</p>
+            </div>
+            <div class="faq-item">
+                <strong>Q: 환불 정책은 어떻게 되나요?</strong>
+                <p>A: 환불 정책은 이용약관을 참고하시기 바랍니다.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목록 - 지역 농산물 직거래</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .product-card {
+            margin: 20px 0; /* 카드 사이의 수직 간격 조정 */
+        }
+        .product-title {
+            color: #4CAF50; /* 농산물에 어울리는 녹색 */
+        }
+        .back-button, .cart-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #f39c12; /* 주황색 */
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-decoration: none;
+        }
+        .back-button:hover, .cart-button:hover {
+            background: #e67e22; /* 다소 어두운 주황색 */
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
+    <div class="container">
+        <h1 class="text-center my-4">상품 목록</h1>
+
+        <!-- 검색 폼 -->
+        <div class="mb-4">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="region" class="sr-only">지역</label>
+                    <select class="form-control" id="region">
+                        <option value="">지역 선택</option>
+                        <option value="서울">서울</option>
+                        <option value="부산">부산</option>
+                        <option value="대구">대구</option>
+                        <option value="광주">광주</option>
+                        <option value="대전">대전</option>
+                    </select>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="product" class="sr-only">상품</label>
+                    <select class="form-control" id="product">
+                        <option value="">상품 선택</option>
+                        <option value="사과">사과</option>
+                        <option value="당근">당근</option>
+                        <option value="토마토">토마토</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">검색</button>
+            </form>
+        </div>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 product-card">
+                    <div class="card h-100">
+                        <img src="https://dummyimage.com/300x200/007bff/ffffff.jpg" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title product-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text">가격: {{ product.price }}원</p>
+                            <button class="btn btn-success" onclick="location.href='{% url 'pages:add_to_cart' product.id %}'">구매하기</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'pages:cart' %}" class="cart-button">장바구니로 이동</a>
+    </div>
+
+    <script>
+        function addToCart(productName) {
+            alert(productName + " 가 장바구니에 추가되었습니다!");
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

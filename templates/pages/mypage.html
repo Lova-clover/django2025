@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 프로필</title>
+    <style>
+        .container {
+            width: 400px; /* 컨테이너 넓이 조정 */
+            margin: 0 auto;
+            text-align: left; /* 왼쪽 정렬 */
+        }
+        label {
+            display: block; /* 레이블을 블록 요소로 설정하여 줄 바꿈 */
+            margin-top: 10px; /* 각 레이블 간격 추가 */
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%; /* 입력 필드 넓이 100% */
+            padding: 10px;
+            margin-top: 5px; /* 레이블과 입력 필드 간격 추가 */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .current-info {
+            margin-top: 20px; /* 현재 정보 섹션과 간격 추가 */
+        }
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #f39c12; /* 주황색 */
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background: #e67e22; /* 다소 어두운 주황색 */
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
+    <div class="container">
+        <h2>사용자 프로필</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" value="{{ profile.user.username }}" required>
+
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" value="{{ profile.user.email }}" required>
+
+            <label for="phone">전화번호:</label>
+            <input type="tel" id="phone" name="phone" value="{{ profile.phone|default:'' }}" required>
+
+            <label for="address">주소:</label>
+            <input type="text" id="address" name="address" value="{{ profile.address|default:'' }}" required>
+
+            <input type="submit" value="정보 수정">
+        </form>
+    </div>
+</body>
+</html>

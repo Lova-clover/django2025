@@ -16,17 +16,30 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
-            <a class="navbar-brand" href="http://localhost:8000/">지역 농산물 거래</a>
+            <a class="navbar-brand" href="{% url 'pages:mainpage' %}">지역 농산물 거래</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="http://localhost:8000/">홈</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://localhost:8000/signup/">회원가입</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://localhost:8000/login/">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'pages:mainpage' %}">홈</a></li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="#!">내정보</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:cart' %}">장바구니</a></li>
                     {% endif %}
-                    <li class="nav-item"><a class="nav-link" href="#!">고객센터</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'pages:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link">{{ user.username }} (logout)</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:login' %}">로그인</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:mypage' %}">내정보</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'pages:signup' %}">회원가입</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'pages:help' %}">고객센터</a></li>
                 </ul>
             </div>
         </div>
@@ -36,32 +49,34 @@
         <!-- Heading Row-->
         <div class="row gx-4 gx-lg-5 align-items-center my-5">
             <div class="col-lg-7">
-                <img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="농산물 이미지" />
+                <img class="img-fluid rounded mb-4 mb-lg-0" src="static/picture/homepage1.png" alt="농산물 이미지" />
             </div>
             <div class="col-lg-5">
-                <h1 class="font-weight-light">신선한 농산물을 만나보세요!</h1>
+                <h1 class="font-weight-light">신선한 농산물들을 직접 구매해보세요!</h1>
                 <p>우리 지역의 신선한 농산물을 직거래로 제공합니다. 믿을 수 있는 농부와 함께하세요!</p>
-                <a class="btn btn-primary" href="#!">지금 쇼핑하기</a>
+                <a class="btn btn-primary" href="http://localhost:8000/products/">지금 쇼핑하기</a>
             </div>
         </div>
         <!-- Call to Action-->
         <div class="card text-white bg-secondary my-5 py-4 text-center">
-            <div class="card-body"><p class="text-white m-0">신선한 농산물 구매는 저희에게 맡기세요!</p></div>
+            <div class="card-body"><h3 class="text-white m-0">신뢰할 수 있는 농부와 함께하는 신선한 농산물들을</h3>
+            <h3>빠르고 안전하게, 신선함을 집으로 배달해드립니다!</h3>
+            </div>
         </div>
         <!-- Content Row-->
         <div class="row gx-4 gx-lg-5">
             <div class="col-md-4 mb-5">
                 <div class="card h-100">
-                    <img src="https://dummyimage.com/300x200/007bff/ffffff.jpg" class="card-img-top" alt="농산물1">
+                    <img src="static/picture/apple.jpg" class="card-img-top" alt="농산물1">
                     <div class="card-body">
                         <h2 class="card-title">신선한 사과</h2>
-                        <p class="card-text">우리 농장에서 직접 재배한 신선한 사과입니다.</p>
+                        <p class="card-text">신선하고 맛있는 사과를 구매하여 드셔보세요.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-5">
                 <div class="card h-100">
-                    <img src="https://dummyimage.com/300x200/28a745/ffffff.jpg" class="card-img-top" alt="농산물2">
+                    <img src="static/picture/carrot.jpg" class="card-img-top" alt="농산물2">
                     <div class="card-body">
                         <h2 class="card-title">신선한 당근</h2>
                         <p class="card-text">비타민이 풍부한 신선한 당근입니다.</p>
@@ -70,7 +85,7 @@
             </div>
             <div class="col-md-4 mb-5">
                 <div class="card h-100">
-                    <img src="https://dummyimage.com/300x200/d39e00/ffffff.jpg" class="card-img-top" alt="농산물3">
+                    <img src="static/picture/tomato.jpg" class="card-img-top" alt="농산물3">
                     <div class="card-body">
                         <h2 class="card-title">신선한 토마토</h2>
                         <p class="card-text">신선하고 맛있는 토마토를 만나보세요.</p>
@@ -81,7 +96,7 @@
     </div>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
-        <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; 지역 농산물 직거래 2025</p></div>
+        <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; 지역 농산물 거래 2025</p></div>
     </footer>
 </body>
 </html>

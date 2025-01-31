@@ -94,7 +94,7 @@
     </style>
 </head>
 <body>
-    <a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
+    <a href="http://localhost:8000/" class="back-button">홈으로 돌아가기</a>
     <div class="form-container">
         <h2>회원가입</h2>
         <form method="post">
@@ -102,7 +102,7 @@
             {{ form.as_p }}
             <button type="submit">회원가입</button>
         </form>
-        <p>계정이 있으신가요? <a href="{% url 'pages:login' %}">여기에서 로그인하세요</a>.</p>
+        <p>계정이 있으신가요? <a href="http://localhost:8000/login/">여기에서 로그인하세요</a>.</p>
     </div>
 </body>
 </html>
