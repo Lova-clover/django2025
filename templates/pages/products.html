@@ -39,26 +39,14 @@
 
         <!-- 검색 폼 -->
         <div class="mb-4">
-            <form class="form-inline">
+            <form class="form-inline" method="GET" action="{% url 'pages:products' %}">
                 <div class="form-group mx-sm-3 mb-2">
                     <label for="region" class="sr-only">지역</label>
-                    <select class="form-control" id="region">
-                        <option value="">지역 선택</option>
-                        <option value="서울">서울</option>
-                        <option value="부산">부산</option>
-                        <option value="대구">대구</option>
-                        <option value="광주">광주</option>
-                        <option value="대전">대전</option>
-                    </select>
+                    <input type="text" class="form-control" id="region" name="region" placeholder="지역 검색" value="{{ request.GET.region }}">
                 </div>
                 <div class="form-group mx-sm-3 mb-2">
                     <label for="product" class="sr-only">상품</label>
-                    <select class="form-control" id="product">
-                        <option value="">상품 선택</option>
-                        <option value="사과">사과</option>
-                        <option value="당근">당근</option>
-                        <option value="토마토">토마토</option>
-                    </select>
+                    <input type="text" class="form-control" id="product" name="product" placeholder="상품명 검색" value="{{ request.GET.product }}">
                 </div>
                 <button type="submit" class="btn btn-primary mb-2">검색</button>
             </form>
@@ -68,25 +56,40 @@
             {% for product in products %}
                 <div class="col-md-4 product-card">
                     <div class="card h-100">
-                        <img src="https://dummyimage.com/300x200/007bff/ffffff.jpg" class="card-img-top" alt="{{ product.name }}">
                         <div class="card-body">
                             <h5 class="card-title product-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text">지역: {{ product.region }}</p>
                             <p class="card-text">가격: {{ product.price }}원</p>
-                            <button class="btn btn-success" onclick="location.href='{% url 'pages:add_to_cart' product.id %}'">구매하기</button>
+                            <p class="card-text">개수: {{ product.quantity }}개</p>
+
+                            <!-- 수량 선택 -->
+                            <form action="{% url 'pages:add_to_cart' product.id %}" method="post" onsubmit="return confirmAddToCart();">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="quantity">수량 선택:</label>
+                                    <input type="number" name="quantity" class="form-control" value="1" min="1" max="{{ product.quantity }}">
+                                </div>
+                                <button type="submit" class="btn btn-success">구매하기</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
+
+        <script>
+            function confirmAddToCart() {
+                return confirm("장바구니에 추가하시겠습니까?");
+            }
+        </script>
+
+        {% if profile.role == 'FARMER' %}
+            <a href="{% url 'pages:add_product' %}" class="btn btn-primary">상품 추가하기</a>
+        {% endif %}
+
         <a href="{% url 'pages:cart' %}" class="cart-button">장바구니로 이동</a>
     </div>
-
-    <script>
-        function addToCart(productName) {
-            alert(productName + " 가 장바구니에 추가되었습니다!");
-        }
-    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

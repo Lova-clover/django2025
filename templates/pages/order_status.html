@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문 상황</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #f39c12; /* 주황색 */
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background: #e67e22; /* 다소 어두운 주황색 */
+        }
+    </style>
+</head>
+<body>
+<a href="{% url 'pages:mainpage' %}" class="back-button">홈으로 돌아가기</a>
+    <div class="container mt-5">
+        <h1 class="text-center">주문 상황</h1>
+        {% if orders %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>상품명</th>
+                        <th>수량</th>
+                        <th>총 가격</th>
+                        <th>주문 날짜</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.product }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{ order.total_price }}원</td>
+                            <td>{{ order.order_date }}</td>
+                            <td>{{ order.status }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center">현재 주문한 상품이 없습니다.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

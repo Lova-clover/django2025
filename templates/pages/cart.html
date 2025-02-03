@@ -77,9 +77,7 @@
                     <tr>
                         <td>{{ item.product.name }}</td>
                         <td>{{ item.product.price }}원</td>
-                        <td>
-                            <input type="number" value="{{ item.quantity }}" min="1" class="form-control" style="width: 80px;">
-                        </td>
+                        <td>{{ item.quantity }}개</td>
                         <td>{{ item.total_price }}원</td>
                         <td>
                             <form method="post" action="{% url 'pages:remove_from_cart' item.id %}">

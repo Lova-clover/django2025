@@ -81,14 +81,40 @@
 
                 <div class="action-buttons text-right">
                     <a href="{% url 'pages:cart' %}" class="btn btn-secondary">취소</a>
-                    <button type="submit" class="btn btn-primary">주문하기</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmOrder()">주문하기</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- 알림 메시지 -->
+    <div id="alert" class="alert alert-success" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; font-size: 1.5rem; padding: 15px 30px;">
+        주문이 완료되었습니다!
+    </div>
+
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function confirmOrder() {
+            // 확인 메시지 표시
+            if (confirm("주문을 완료하시겠습니까?")) {
+                // 사용자가 "네"를 클릭하면 폼을 제출
+                document.querySelector('form').submit();
+
+                // 알림 메시지 표시
+                var alertBox = document.getElementById('alert');
+                alertBox.style.display = 'block';
+
+                // 일정 시간 후 알림 메시지 숨기기
+                setTimeout(function() {
+                    alertBox.style.display = 'none';
+                }, 3000); // 3초 후에 사라짐
+            }
+        }
+    </script>
 </body>
 </html>

@@ -16,7 +16,8 @@
         input[type="text"],
         input[type="email"],
         input[type="tel"],
-        select {
+        select,
+        textarea {
             width: 100%; /* 입력 필드 넓이 100% */
             padding: 10px;
             margin-top: 5px; /* 레이블과 입력 필드 간격 추가 */
@@ -60,6 +61,20 @@
 
             <label for="address">주소:</label>
             <input type="text" id="address" name="address" value="{{ profile.address|default:'' }}" required>
+
+            <label for="role">역할:</label>
+            <select id="role" name="role" required>
+                <option value="USER" {% if profile.role == 'USER' %}selected{% endif %}>유저</option>
+                <option value="FARMER" {% if profile.role == 'FARMER' %}selected{% endif %}>농부</option>
+            </select>
+
+            {% if profile.role == 'FARMER' %}
+                <label for="produce_info">농장 주소:</label>
+                <textarea id="produce_info" name="produce_info" rows="4">{{ profile.produce_info }}</textarea>
+
+                <label for="crop">작물:</label>
+                <textarea id="crop" name="crop" rows="4">{{ profile.crop }}</textarea>
+            {% endif %}
 
             <input type="submit" value="정보 수정">
         </form>
