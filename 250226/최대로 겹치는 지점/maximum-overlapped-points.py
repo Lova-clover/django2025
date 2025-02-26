@@ -1,5 +1,5 @@
 N = int(input())
-arr = [0 for i in range(100)]
+arr = [0 for i in range(200)]
 
 for _ in range(N):
     x1, x2 = list(map(int, input().split()))
