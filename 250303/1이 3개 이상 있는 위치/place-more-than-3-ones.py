@@ -1,10 +1,10 @@
 def in_range(x, y):
-    return 0 <= x < N and 0 <= y < N
+    return 0 <= x < n and 0 <= y < n
 
 dx = [1, 0, -1, 0]
 dy = [0, 1, 0, -1]
 
-N = int(input())
+n = int(input())
 arr = [list(map(int, input().split())) for i in range(n)]
 
 answer = 0
