@@ -1,19 +1,12 @@
-a=[]
-b=[]
-c=[]
-d=[]
+arr_2d = [
+	list(map(int, input().split()))
+	for _ in range(4)
+]
 
+sum_val = 0
 
 for i in range(4):
-    arr=list(map(int, input().split()))
-    if i==0:
-        a.append(arr)
-    if i==1:
-        b.append(arr)
-    if i==2:
-        c.append(arr)
-    if i==3:
-        d.append(arr)
+    for j in range(i+1):
+        sum_val += arr_2d[i][j]
 
-
-print(sum(a[0][:1])+sum(b[0][:2])+sum(c[0][:3])+sum(d[0][:4]))
+print(sum_val)
