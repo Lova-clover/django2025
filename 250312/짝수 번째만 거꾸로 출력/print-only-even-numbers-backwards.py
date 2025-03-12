@@ -8,4 +8,4 @@ for elem in arr:
         arr2.append(elem)
     cnt +=1
 
-print(*arr2[::-1],sep="")
+print("".join(arr2[::-1]))
