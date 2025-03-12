@@ -14,4 +14,4 @@ for i in range(n):
         cnt +=1
         sum_cnt += arr[i]
 
-print(f"{cnt} {len(sum_cnt)//cnt:.2f}")
+print(f"{cnt} {len(sum_cnt)/cnt:.2f}")
