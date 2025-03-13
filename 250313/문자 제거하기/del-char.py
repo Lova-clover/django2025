@@ -3,7 +3,7 @@ arr = list(string)
 
 while True:
     n = int(input())
-    if len(arr) < n:
+    if len(arr) <= n:
         arr.pop(len(arr)-1)
     else:
         arr.pop(n)
