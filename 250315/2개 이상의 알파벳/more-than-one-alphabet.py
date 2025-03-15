@@ -8,7 +8,7 @@ def alpa(A):
         for j in range(i+1, len(A)):
             if A[i] != A[j]:
                 cnt+=1
-        if cnt>=2:
+        if cnt>=1:
             return True
     return False
 
