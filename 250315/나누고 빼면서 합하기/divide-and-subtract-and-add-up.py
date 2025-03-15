@@ -6,16 +6,16 @@ cnt = 0
 
 def func():
     global cnt, m
+    cnt += A[m-1]
     while True:
         if m==1:
             break
+        if m%2!=0:
+            m -=1
+            cnt += A[m-1]
         else:
-            if m%2!=0:
-                m -=1
-                cnt += m
-            else:
-                m // 2
-                cnt += m
+            m = m // 2
+            cnt += A[m-1]
 
 func()
 print(cnt)
