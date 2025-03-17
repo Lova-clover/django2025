@@ -12,6 +12,6 @@ def func(n):
         return func(n//2)
     else:
         cnt+=1
-        returnfunc(n*3+1)
+        return func(n*3+1)
     
 print(func(n))
